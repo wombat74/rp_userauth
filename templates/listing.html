@@ -3,7 +3,7 @@
 <h1>Blog listing</h1>
 <ul>
     {% for blog in blogs %}
-    <li><a href="{% url 'view.blog' blog.id %}">{{ blog.title }}</a></li>
+    <li><a href="{% url 'view_blog' blog.id %}">{{ blog.title }}</a></li>
     {% endfor %}
 </ul>
-{% endblock %}
+{% endblock content%}
