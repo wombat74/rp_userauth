@@ -9,4 +9,5 @@ urlpatterns = [
     path("see_request/", core_views.see_request),
     path("user_info/", core_views.user_info),
     path("private_place/", core_views.private_place),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]
