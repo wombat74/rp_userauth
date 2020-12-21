@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from core.models import Blog
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 def listing(request):
@@ -49,7 +49,12 @@ def user_info(request):
 
     return HttpResponse(text, content_type="text/plain")
 
-
 @login_required
 def private_place(request):
     return HttpResponse("Shhh, members only!", content_type="text/plain")
+
+@user_passes_test(lambda user: user.is_staff)
+def staff_place(request):
+    return HttpResponse("Employees must wash hands!", content_type="text/plain")
+
+
