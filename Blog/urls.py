@@ -10,4 +10,7 @@ urlpatterns = [
     path("user_info/", core_views.user_info),
     path("private_place/", core_views.private_place),
     path("accounts/", include("django.contrib.auth.urls")),
+    path("staff_place/", core_views.staff_place),
+    path("super_place/", core_views.super_place),
+    path("add_messages/", core_views.add_messages),
 ]

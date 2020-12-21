@@ -1,8 +1,9 @@
 from django.contrib.auth import login
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from core.models import Blog
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib import messages
 
 
 def listing(request):
@@ -56,5 +57,17 @@ def private_place(request):
 @user_passes_test(lambda user: user.is_staff)
 def staff_place(request):
     return HttpResponse("Employees must wash hands!", content_type="text/plain")
+
+@user_passes_test(lambda user: user.is_superuser)
+def super_place(request):
+    return HttpResponse("You're a superuser, cool!", content_type="text/plain")
+
+@login_required
+def add_messages(request):
+    username = request.user.username
+    messages.add_message(request, messages.INFO, f"Hello { username }")
+    messages.add_message(request, messages.WARNING, "DANGER WILL ROBINSON!")
+
+    return HttpResponse("Messages added", content_type="text/plain")
 
 
